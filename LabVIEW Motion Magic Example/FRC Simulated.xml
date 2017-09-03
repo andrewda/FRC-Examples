@@ -7622,7 +7622,7 @@
 </Array>
 <String>
 <Name>Parameters</Name>
-<Val>[FMax]	20
+<Val>[FMax] 20
 [Fudge Factor]	1
 [Bounce]	0
 [CFM]	0.00001
@@ -7747,7 +7747,7 @@
 </Array>
 <String>
 <Name>Parameters</Name>
-<Val>[FMax]	20
+<Val>[FMax] 20
 [Fudge Factor]	1
 [Bounce]	0
 [CFM]	0.00001
@@ -7872,7 +7872,7 @@
 </Array>
 <String>
 <Name>Parameters</Name>
-<Val>[FMax]	20
+<Val>[FMax] 20
 [Fudge Factor]	1
 [Bounce]	0
 [CFM]	0.00001
@@ -7997,7 +7997,7 @@
 </Array>
 <String>
 <Name>Parameters</Name>
-<Val>[FMax]	20
+<Val>[FMax] 20
 [Fudge Factor]	1
 [Bounce]	0
 [CFM]	0.00001
@@ -8712,7 +8712,7 @@
 </Array>
 <String>
 <Name>Parameters</Name>
-<Val>[FMax]	2.5
+<Val>[FMax] 2.5
 [Fudge Factor]	0.1
 [Bounce]	0
 [CFM]	0.001

@@ -9,11 +9,11 @@
  * changeMotionControlFramePeriod
  * 
  * getMotionProfileStatus		
- * clearMotionProfileHasUnderrun     to get status and potentially clear the error flag.
+ * clearMotionProfileHasUnderrun	 to get status and potentially clear the error flag.
  * 
  * pushMotionProfileTrajectory
  * clearMotionProfileTrajectories
- * processMotionProfileBuffer,   to push/clear, and process the trajectory points.
+ * processMotionProfileBuffer,	 to push/clear, and process the trajectory points.
  * 
  * getControlMode, to check if we are in Motion Profile Control mode.
  * 
@@ -90,7 +90,7 @@ public class MotionProfileExample {
 	 * every 10ms.
 	 */
 	class PeriodicRunnable implements java.lang.Runnable {
-	    public void run() {  _talon.processMotionProfileBuffer();    }
+		public void run() {	 _talon.processMotionProfileBuffer();	 }
 	}
 	Notifier _notifer = new Notifier(new PeriodicRunnable());
 	
@@ -99,7 +99,7 @@ public class MotionProfileExample {
 	 * C'tor
 	 * 
 	 * @param talon
-	 *            reference to Talon object to fetch motion profile status from.
+	 *			  reference to Talon object to fetch motion profile status from.
 	 */
 	public MotionProfileExample(CANTalon talon) {
 		_talon = talon;
@@ -274,7 +274,7 @@ public class MotionProfileExample {
 
 			point.isLastPoint = false;
 			if ((i + 1) == totalCnt)
-				point.isLastPoint = true; /* set this to true on the last point  */
+				point.isLastPoint = true; /* set this to true on the last point	 */
 
 			_talon.pushMotionProfileTrajectory(point);
 		}
@@ -291,8 +291,8 @@ public class MotionProfileExample {
 	/**
 	 * 
 	 * @return the output value to pass to Talon's set() routine. 0 for disable
-	 *         motion-profile output, 1 for enable motion-profile, 2 for hold
-	 *         current motion profile trajectory point.
+	 *		   motion-profile output, 1 for enable motion-profile, 2 for hold
+	 *		   current motion profile trajectory point.
 	 */
 	CANTalon.SetValueMotionProfile getSetValue() {
 		return _setValue;

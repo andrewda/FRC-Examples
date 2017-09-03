@@ -193,9 +193,9 @@ int PigeonImu::GetGeneralStatus(PigeonImu::GeneralStatus & statusToFill)
 	calibrationErr <<= (32 - 4);
 	calibrationErr >>= (32 - 4);
 
-	int32_t noMotionBiasCount =  (uint8_t)(_cache >> 0x24) & 0xF;
-	int32_t tempCompensationCount =  (uint8_t)(_cache >> 0x20) & 0xF;
-	int32_t upTimSec =  (uint8_t)(_cache >> 0x38);
+	int32_t noMotionBiasCount =	 (uint8_t)(_cache >> 0x24) & 0xF;
+	int32_t tempCompensationCount =	 (uint8_t)(_cache >> 0x20) & 0xF;
+	int32_t upTimSec =	(uint8_t)(_cache >> 0x38);
 
 	statusToFill.currentMode = currentMode;
 	statusToFill.calibrationError = calibrationErr;
@@ -211,7 +211,7 @@ int PigeonImu::GetGeneralStatus(PigeonImu::GeneralStatus & statusToFill)
 	if (errCode != 0) { // same as NoComm
 		statusToFill.description = "Status frame was not received, check wired connections and web-based config.";
 	} else if(statusToFill.bCalIsBooting) {
-		statusToFill.description = "Pigeon is boot-caling to properly bias accel and gyro.  Do not move Pigeon.  When finished biasing, calibration mode will start.";
+		statusToFill.description = "Pigeon is boot-caling to properly bias accel and gyro.	Do not move Pigeon.	 When finished biasing, calibration mode will start.";
 	} else if(statusToFill.state == UserCalibration) {
 		/* mode specific descriptions */
 		switch(currentMode) {
@@ -219,7 +219,7 @@ int PigeonImu::GetGeneralStatus(PigeonImu::GeneralStatus & statusToFill)
 				statusToFill.description = "Boot-Calibration: Gyro and Accelerometer are being biased.";
 				break;
 			case Temperature:
-				statusToFill.description = "Temperature-Calibration: Pigeon is collecting temp data and will finish when temp range is reached.  "
+				statusToFill.description = "Temperature-Calibration: Pigeon is collecting temp data and will finish when temp range is reached.	 "
 				"Do not moved Pigeon.";
 				break;
 			case Magnetometer12Pt:
@@ -229,24 +229,24 @@ int PigeonImu::GetGeneralStatus(PigeonImu::GeneralStatus & statusToFill)
 				statusToFill.description = "Magnetometer Level 2 calibration: Spin robot slowly in 360' fashion.  ";
 				break;
 			case Accelerometer:
-				statusToFill.description = "Accelerometer Calibration: Pigeon PCB must be placed on a level source.  Follow User's Guide for how to level surfacee.  ";
+				statusToFill.description = "Accelerometer Calibration: Pigeon PCB must be placed on a level source.	 Follow User's Guide for how to level surfacee.	 ";
 				break;
 		}
 	} else if (statusToFill.state == Ready){
 		/* definitely not doing anything cal-related.  So just instrument the motion driver state */
-		statusToFill.description = "Pigeon is running normally.  Last CAL error code was ";
+		statusToFill.description = "Pigeon is running normally.	 Last CAL error code was ";
 		statusToFill.description += std::to_string(calibrationErr);
 		statusToFill.description += ".";
 	} else if (statusToFill.state == Initializing){
 		/* definitely not doing anything cal-related.  So just instrument the motion driver state */
-		statusToFill.description = "Pigeon is boot-caling to properly bias accel and gyro.  Do not move Pigeon.";
+		statusToFill.description = "Pigeon is boot-caling to properly bias accel and gyro.	Do not move Pigeon.";
 	} else {
 		statusToFill.description = "Not enough data to determine status.";
 	}
 
 	return HandleError(errCode);
 }
-//----------------------- General Error status  -----------------------//
+//----------------------- General Error status	-----------------------//
 int PigeonImu::GetLastError()
 {
 	return _lastError;
@@ -257,7 +257,7 @@ int PigeonImu::HandleError(int errorCode)
 	/* error handler */
 	if (errorCode != 0) {
 		/* what should we do here? */
-	    wpi_setErrorWithContext(errorCode, HAL_GetErrorMessage(errorCode));
+		wpi_setErrorWithContext(errorCode, HAL_GetErrorMessage(errorCode));
 	}
 	/* mirror last status */
 	_lastError = errorCode;
@@ -279,7 +279,7 @@ int PigeonImu::SendCAN(int arbId, const uint64_t & data, int dataSize, int perio
 {
 
 	int32_t status = 0;
-	FRC_NetworkCommunication_CANSessionMux_sendMessage(	arbId,
+	FRC_NetworkCommunication_CANSessionMux_sendMessage( arbId,
 														(const uint8_t*)&data,
 														dataSize,
 														periodMs,
@@ -452,7 +452,7 @@ int PigeonImu::GetAccumGyro(double xyz_deg[3])
 	return HandleError(errCode);
 }
 /**
- *  @return compass heading [0,360) degrees.
+ *	@return compass heading [0,360) degrees.
  */
 double PigeonImu::GetAbsoluteCompassHeading()
 {
@@ -460,8 +460,8 @@ double PigeonImu::GetAbsoluteCompassHeading()
 	double retval;
 	int errCode = ReceiveCAN(COND_STATUS_2);
 
-	uint8_t  m8 =  (_cache >> 0x30) & 0xFF;
-	uint8_t  l8 =  (_cache >> 0x38) & 0xFF;
+	uint8_t	 m8 =  (_cache >> 0x30) & 0xFF;
+	uint8_t	 l8 =  (_cache >> 0x38) & 0xFF;
 
 	raw = m8;
 	raw <<= 8;
@@ -474,17 +474,17 @@ double PigeonImu::GetAbsoluteCompassHeading()
 	return retval;
 }
 /**
- *  @return continuous compass heading [-23040, 23040) degrees.
- *  Use SetCompassHeading to modify the wrap-around portion.
+ *	@return continuous compass heading [-23040, 23040) degrees.
+ *	Use SetCompassHeading to modify the wrap-around portion.
  */
 double PigeonImu::GetCompassHeading()
 {
 	int32_t raw;
 	double retval;
 	int errCode = ReceiveCAN(COND_STATUS_2);
-	uint8_t  h4 =  (_cache >> 0x28) & 0xF;
-	uint8_t  m8 =  (_cache >> 0x30) & 0xFF;
-	uint8_t  l8 =  (_cache >> 0x38) & 0xFF;
+	uint8_t	 h4 =  (_cache >> 0x28) & 0xF;
+	uint8_t	 m8 =  (_cache >> 0x30) & 0xFF;
+	uint8_t	 l8 =  (_cache >> 0x38) & 0xFF;
 
 	raw = h4;
 	raw <<= 8;
@@ -621,7 +621,7 @@ int PigeonImu::GetAccelerometerAngles(double tiltAngles[3])
 	return HandleError(errCode);
 }
 /**
- * @param status 	object reference to fill with fusion status flags.  
+ * @param status	object reference to fill with fusion status flags.	
  *					Caller may omit this parameter if flags are not needed.
  * @return fused heading in degrees.
  */
@@ -640,7 +640,7 @@ double PigeonImu::GetFusedHeading(FusionStatus & status)
 	if (errCode != 0) {
 		bIsFusing = false;
 		bIsValid = false;
-		description = "Could not receive status frame.  Check wiring and web-config.";
+		description = "Could not receive status frame.	Check wiring and web-config.";
 	} else {
 		int flags = (b2) & 7;
 		if (flags == 7) {
@@ -727,7 +727,7 @@ uint32_t PigeonImu::GetResetFlags()
 	return retval;
 }
 /**
- * @param param holds the version of the Talon.  Talon must be powered cycled at least once.
+ * @param param holds the version of the Talon.	 Talon must be powered cycled at least once.
  */
 uint32_t PigeonImu::GetFirmVers()
 {

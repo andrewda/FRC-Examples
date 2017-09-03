@@ -66,16 +66,16 @@ public class Robot extends IterativeRobot {
 		_driveStick = new Joystick(0);	
 	}
 	
-    public void teleopInit() {
+	public void teleopInit() {
 		_pidgey.SetFusedHeading(0.0); /* reset heading, angle measurement wraps at plus/minus 23,040 degrees (64 rotations) */
 		_goStraight = GoStraight.Off;  
-    }
+	}
 	
-    /**
-     * This function is called periodically during operator control
-     */
-    public void teleopPeriodic() {
-    	/* some temps for Pigeon API */
+	/**
+	 * This function is called periodically during operator control
+	 */
+	public void teleopPeriodic() {
+		/* some temps for Pigeon API */
 		PigeonImu.GeneralStatus genStatus = new PigeonImu.GeneralStatus();
 		PigeonImu.FusionStatus fusionStatus = new PigeonImu.FusionStatus();
 		double [] xyz_dps = new double [3];
@@ -114,7 +114,7 @@ public class Robot extends IterativeRobot {
 				if (userWantsGoStraight == false) {
 					_goStraight = GoStraight.Off; /* user let go, turn off the feature */
 				} else if (angleIsGood == false) {
-					_goStraight = GoStraight.SameThrottle; /* we were servoing with pidgy, but we lost connection?  Check wiring and deviceID setup */
+					_goStraight = GoStraight.SameThrottle; /* we were servoing with pidgy, but we lost connection?	Check wiring and deviceID setup */
 				} else {
 					/* user still wants to drive straight, keep doing it */
 				}
@@ -177,9 +177,9 @@ public class Robot extends IterativeRobot {
 		 * be replaced with your favorite means of changing gains. */
 		if (_driveStick.getRawButton(6)) {
 			UpdatGains();
-		}     
-    }
-    /** @return 10% deadband */
+		}	  
+	}
+	/** @return 10% deadband */
 	double Db(double axisVal) {
 		if (axisVal < -0.10)
 			return axisVal;
@@ -226,5 +226,5 @@ public class Robot extends IterativeRobot {
 			return 0.10;
 		return forwardThrot;
 	}
-    
+	
 }

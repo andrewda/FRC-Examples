@@ -48,44 +48,44 @@ public class CtreCanMap {
 		/* call into JNI to get message */
 		try {
 	
-		    ByteBuffer targetedMessageID = ByteBuffer.allocateDirect(4);
-		    targetedMessageID.order(ByteOrder.LITTLE_ENDIAN);
-		    
-		    targetedMessageID.asIntBuffer().put(0, arbId);
+			ByteBuffer targetedMessageID = ByteBuffer.allocateDirect(4);
+			targetedMessageID.order(ByteOrder.LITTLE_ENDIAN);
+			
+			targetedMessageID.asIntBuffer().put(0, arbId);
 		
-		    ByteBuffer timeStamp = ByteBuffer.allocateDirect(4);
+			ByteBuffer timeStamp = ByteBuffer.allocateDirect(4);
 		 
-		    // Get the data.
-		    ByteBuffer dataBuffer =
-		        CANJNI.FRCNetCommCANSessionMuxReceiveMessage(targetedMessageID.asIntBuffer(),
-		        		0xFFFFFFFF, timeStamp);
+			// Get the data.
+			ByteBuffer dataBuffer =
+				CANJNI.FRCNetCommCANSessionMuxReceiveMessage(targetedMessageID.asIntBuffer(),
+						0xFFFFFFFF, timeStamp);
 
-		    if(( dataBuffer != null) && (timeStamp != null)) {
-		    	/* fresh message */
-		    	toFill._len = dataBuffer.capacity();
-		    	toFill._data = 0;
-		    	if(toFill._len > 0){
-		    		int lenMinusOne = toFill._len - 1; 
-		    		for (int i = 0; i < toFill._len; i++) {
-		    			/* grab byte without sign extensions */
-		    			long aByte = dataBuffer.get(lenMinusOne-i);
-		    			aByte &= 0xFF;
-		    			/* stuff little endian */
-		    			toFill._data <<= 8;
-		    			toFill._data |= aByte;
-		    		}
-		    	}
+			if(( dataBuffer != null) && (timeStamp != null)) {
+				/* fresh message */
+				toFill._len = dataBuffer.capacity();
+				toFill._data = 0;
+				if(toFill._len > 0){
+					int lenMinusOne = toFill._len - 1; 
+					for (int i = 0; i < toFill._len; i++) {
+						/* grab byte without sign extensions */
+						long aByte = dataBuffer.get(lenMinusOne-i);
+						aByte &= 0xFF;
+						/* stuff little endian */
+						toFill._data <<= 8;
+						toFill._data |= aByte;
+					}
+				}
 				toFill._time = System.currentTimeMillis();
 
 				/* store it */
 				_map.put(arbId, toFill.clone());
 				retval = CTR_Code.CTR_OKAY;
-		    }
-		    else 
-		    {
-		    	/* no message */
-		    	retval = CTR_Code.CTR_RxTimeout;
-		    }
+			}
+			else 
+			{
+				/* no message */
+				retval = CTR_Code.CTR_RxTimeout;
+			}
 
 		} catch (Exception e) {
 			/* no message, check the cache*/

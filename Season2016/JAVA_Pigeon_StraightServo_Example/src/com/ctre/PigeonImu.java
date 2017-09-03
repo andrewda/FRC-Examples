@@ -47,7 +47,7 @@ public class PigeonImu extends CtreCanMap
 		public int lastError;
 	}
 	/** Various calibration modes supported by Pigeon. */
-	public enum CalibrationMode	{
+	public enum CalibrationMode {
 		BootTareGyroAccel(0),
 		Temperature(1),
 		Magnetometer12Pt(2),
@@ -89,22 +89,22 @@ public class PigeonImu extends CtreCanMap
 	 *
 	 * When a calibration mode is entered, caller can expect...
 	 *
-	 *  - PigeonState to reset to Initializing and bCalIsBooting is set to true.  Pigeon LEDs will blink the boot pattern.
-	 *  	This is similar to the normal boot cal, however it can an additional ~30 seconds since calibration generally
-	 *  	requires more information.
-	 *  	currentMode will reflect the user's selected calibration mode.
+	 *	- PigeonState to reset to Initializing and bCalIsBooting is set to true.  Pigeon LEDs will blink the boot pattern.
+	 *		This is similar to the normal boot cal, however it can an additional ~30 seconds since calibration generally
+	 *		requires more information.
+	 *		currentMode will reflect the user's selected calibration mode.
 	 *
-	 *  - PigeonState will eventually settle to UserCalibration and Pigeon LEDs will show cal specific blink patterns.
-	 *  	bCalIsBooting is now false.
+	 *	- PigeonState will eventually settle to UserCalibration and Pigeon LEDs will show cal specific blink patterns.
+	 *		bCalIsBooting is now false.
 	 *
-	 *  - Follow the instructions in the Pigeon User Manual to meet the calibration specific requirements.
-	 * 		When finished calibrationError will update with the result.
-	 * 		Pigeon will solid-fill LEDs with red (for failure) or green (for success) for ~5 seconds.
-	 * 		Pigeon then perform boot-cal to cleanly apply the newly saved calibration data.
+	 *	- Follow the instructions in the Pigeon User Manual to meet the calibration specific requirements.
+	 *		When finished calibrationError will update with the result.
+	 *		Pigeon will solid-fill LEDs with red (for failure) or green (for success) for ~5 seconds.
+	 *		Pigeon then perform boot-cal to cleanly apply the newly saved calibration data.
 	 */
 	public static class GeneralStatus {
 		/**
-		 * The current state of the motion driver.  This reflects if the sensor signals are accurate.
+		 * The current state of the motion driver.	This reflects if the sensor signals are accurate.
 		 * Most calibration modes will force Pigeon to reinit the motion driver.
 		 */
 		public PigeonState state;
@@ -122,7 +122,7 @@ public class PigeonImu extends CtreCanMap
 		public int calibrationError;
 		/**
 		 * After caller requests a calibration mode, pigeon will perform a boot-cal before
-		 * entering the requested mode.  During this period, this flag is set to true.
+		 * entering the requested mode.	 During this period, this flag is set to true.
 		 */
 		public boolean bCalIsBooting;
 		/**
@@ -478,7 +478,7 @@ public class PigeonImu extends CtreCanMap
 			if (errCode != 0) { // same as NoComm
 				statusToFill.description = "Status frame was not received, check wired connections and web-based config.";
 			} else if(statusToFill.bCalIsBooting) {
-				statusToFill.description = "Pigeon is boot-caling to properly bias accel and gyro.  Do not move Pigeon.  When finished biasing, calibration mode will start.";
+				statusToFill.description = "Pigeon is boot-caling to properly bias accel and gyro.	Do not move Pigeon.	 When finished biasing, calibration mode will start.";
 			} else if(statusToFill.state == PigeonState.UserCalibration) {
 				/* mode specific descriptions */
 				switch(currentMode) {
@@ -486,7 +486,7 @@ public class PigeonImu extends CtreCanMap
 						statusToFill.description = "Boot-Calibration: Gyro and Accelerometer are being biased.";
 						break;
 					case Temperature:
-						statusToFill.description = "Temperature-Calibration: Pigeon is collecting temp data and will finish when temp range is reached.  " +
+						statusToFill.description = "Temperature-Calibration: Pigeon is collecting temp data and will finish when temp range is reached.	 " +
 						"Do not moved Pigeon.";
 						break;
 					case Magnetometer12Pt:
@@ -496,7 +496,7 @@ public class PigeonImu extends CtreCanMap
 						statusToFill.description = "Magnetometer Level 2 calibration: Spin robot slowly in 360' fashion.  ";
 						break;
 					case Accelerometer:
-						statusToFill.description = "Accelerometer Calibration: Pigeon PCB must be placed on a level source.  Follow User's Guide for how to level surfacee.  ";
+						statusToFill.description = "Accelerometer Calibration: Pigeon PCB must be placed on a level source.	 Follow User's Guide for how to level surfacee.	 ";
 						break;
 					case Unknown:
 						statusToFill.description = "Unknown Calibration mode: " + iCurrMode;
@@ -504,19 +504,19 @@ public class PigeonImu extends CtreCanMap
 				}
 			} else if (statusToFill.state == PigeonState.Ready){
 				/* definitely not doing anything cal-related.  So just instrument the motion driver state */
-				statusToFill.description = "Pigeon is running normally.  Last CAL error code was ";
+				statusToFill.description = "Pigeon is running normally.	 Last CAL error code was ";
 				statusToFill.description += calibrationErr;
 				statusToFill.description += ".";
 			} else if (statusToFill.state == PigeonState.Initializing){
 				/* definitely not doing anything cal-related.  So just instrument the motion driver state */
-				statusToFill.description = "Pigeon is boot-caling to properly bias accel and gyro.  Do not move Pigeon.";
+				statusToFill.description = "Pigeon is boot-caling to properly bias accel and gyro.	Do not move Pigeon.";
 			} else {
 				statusToFill.description = "Not enough data to determine status.";
 			}
 		}
 		return HandleError(errCode);
 	}
-	//----------------------- General Error status  -----------------------//
+	//----------------------- General Error status	-----------------------//
 	public int GetLastError()
 	{
 		return _lastError;
@@ -566,7 +566,7 @@ public class PigeonImu extends CtreCanMap
 	{
 		int retval = 0; /* no means of getting error info for now */
 		
-        ByteBuffer trustedBuffer = ByteBuffer.allocateDirect(dataSize);
+		ByteBuffer trustedBuffer = ByteBuffer.allocateDirect(dataSize);
 
 		switch (dataSize) {
 			default:
@@ -580,10 +580,10 @@ public class PigeonImu extends CtreCanMap
 			case 1: trustedBuffer.put(0, (byte) (data >> 0x00));	break;
 			case 0: /* nothing to do */ break;
 		}
-        CANJNI.FRCNetCommCANSessionMuxSendMessage(arbId, trustedBuffer, periodMs);
-        
-        return retval;
-    }
+		CANJNI.FRCNetCommCANSessionMuxSendMessage(arbId, trustedBuffer, periodMs);
+		
+		return retval;
+	}
 	/**
 	 * Decode two 16bit params.
 	 */
@@ -653,7 +653,7 @@ public class PigeonImu extends CtreCanMap
 
 	private int GetThreeBoundedAngles(int arbId, double [] boundedAngles)
 	{
-		return  GetThreeParam16(arbId, boundedAngles, 360f / 32768f);
+		return	GetThreeParam16(arbId, boundedAngles, 360f / 32768f);
 	}
 	private int GetFourParam16(int arbId, double [] params, double scalar)
 	{
@@ -764,7 +764,7 @@ public class PigeonImu extends CtreCanMap
 		return HandleError(errCode);
 	}
 	/**
-	 *  @return compass heading [0,360) degrees.
+	 *	@return compass heading [0,360) degrees.
 	 */
 	public double GetAbsoluteCompassHeading()
 	{
@@ -785,17 +785,17 @@ public class PigeonImu extends CtreCanMap
 		return retval;
 	}
 	/**
-	 *  @return continuous compass heading [-23040, 23040) degrees.
-	 *  Use SetCompassHeading to modify the wrap-around portion.
+	 *	@return continuous compass heading [-23040, 23040) degrees.
+	 *	Use SetCompassHeading to modify the wrap-around portion.
 	 */
 	public double GetCompassHeading()
 	{
 		int raw;
 		double retval;
 		int errCode = ReceiveCAN(COND_STATUS_2);
-		int  h4 =  (int) ((_cache >> 0x28) & 0xF);
-		int  m8 =  (int) ((_cache >> 0x30) & 0xFF);
-		int  l8 =  (int) ((_cache >> 0x38) & 0xFF);
+		int	 h4 =  (int) ((_cache >> 0x28) & 0xF);
+		int	 m8 =  (int) ((_cache >> 0x30) & 0xFF);
+		int	 l8 =  (int) ((_cache >> 0x38) & 0xFF);
 	
 		raw = h4;
 		raw <<= 8;
@@ -934,7 +934,7 @@ public class PigeonImu extends CtreCanMap
 		return HandleError(errCode);
 	}
 	/**
-	 * @param status 	object reference to fill with fusion status flags.  
+	 * @param status	object reference to fill with fusion status flags.	
 	 *					Caller may pass null if flags are not needed.
 	 * @return fused heading in degrees.
 	 */
@@ -952,7 +952,7 @@ public class PigeonImu extends CtreCanMap
 		if (errCode != 0) {
 			bIsFusing = false;
 			bIsValid = false;
-			description = "Could not receive status frame.  Check wiring and web-config.";
+			description = "Could not receive status frame.	Check wiring and web-config.";
 		} else {
 			int flags = (b2) & 7;
 			if (flags == 7) {
@@ -1042,7 +1042,7 @@ public class PigeonImu extends CtreCanMap
 	{
 		/* repoll status frame */
 		int errCode = GetStartupStatus();
-		int retval  = _resetStats.firmVers;
+		int retval	= _resetStats.firmVers;
 		HandleError(errCode);
 		return retval;
 	}

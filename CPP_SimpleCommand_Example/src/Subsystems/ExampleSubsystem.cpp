@@ -32,7 +32,7 @@ void ExampleSubsystem::InitHardware()
 void ExampleSubsystem::SetOutputOfSomeKind(double output)
 {
 	// additionally could null check _talon if need be.
-	// for example:  if(_talon == 0) { return; }
+	// for example:	 if(_talon == 0) { return; }
 	_talon->Set(output);
 }
 

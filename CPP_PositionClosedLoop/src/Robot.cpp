@@ -5,7 +5,7 @@
  * Be sure to select the correct feedback sensor using SetFeedbackDevice() below.
  *
  * After deploying/debugging this to your RIO, first use the left Y-stick
- * to throttle the Talon manually.  This will confirm your hardware setup.
+ * to throttle the Talon manually.	This will confirm your hardware setup.
  * Be sure to confirm that when the Talon is driving forward (green) the
  * position sensor is moving in a positive direction.  If this is not the cause
  * flip the boolean input to the reverseSensor() call below.

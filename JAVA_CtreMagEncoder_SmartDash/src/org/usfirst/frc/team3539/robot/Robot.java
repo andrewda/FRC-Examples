@@ -16,19 +16,19 @@
  * SmartDashboard (SD) setup.
  * [1] Open Smartdashboard (I typically (re)select the Dashboard Type in DriverStation if the SD doesn't pop up).
  * [2] Deploy software and enable.
- * [3] Find the text entry in the SD for "spd".  
+ * [3] Find the text entry in the SD for "spd".	 
  * [4] View =>Editable should be checked.
- * [5] Right-click on "spd" label and "Change to..." the Line Plot.  
+ * [5] Right-click on "spd" label and "Change to..." the Line Plot.	 
  * 
  * A few details regarding Smartdashboard in general...
  * [1] Constant data does not render new plot points. So if the signal being measured doesn't change value, the plot stops.
  * Once the signal changes again the plot resumes but the time gap between is truncated in the plot.
  * [2] Changing the window of samples is done by View=>Editable=>Check, then right click-properties on the plot.
- * 		Then change "Buffer Size" in the popup.   I find myself changing this often as I learn more about the signal I am viewing.
+ *		Then change "Buffer Size" in the popup.	  I find myself changing this often as I learn more about the signal I am viewing.
  * [3] Zoom features will cause the plot to stop updating and I haven't found a quick way to get the plot to resume plotting.  So 
- * 		I've been avoiding Zoom-In/Zoom-Out for now.
+ *		I've been avoiding Zoom-In/Zoom-Out for now.
  * [4] Right-click properties on the plot does different things depending on if View=>Editable is checked.
- *  
+ *	
  * @author Ozrien
  */
 package org.usfirst.frc.team3539.robot; // bulldogs!
@@ -64,14 +64,14 @@ public class Robot extends IterativeRobot {
 
 	public void teleopPeriodic() {
 		/* Shooting for ~200RPM, which is ~300ms per rotation.
-		 *   
+		 *	 
 		 * If there is mechanical deflection, eccentricity, or damage in the sensor
 		 * it should be revealed in the plot.  
 		 * 
 		 * For example, an optical encoder with a partially damaged ring will reveal a 
 		 * periodic dip in the sensed velocity synchronous with each rotation.
 		 * 
-		 *  This can also be wired to a gamepad to test velocity sweeping.
+		 *	This can also be wired to a gamepad to test velocity sweeping.
 		 * */
 		_tal3.set(0.4);		
 	}

@@ -5,7 +5,7 @@
  * Be sure to select the correct feedback sensor using SetFeedbackDevice() below.
  *
  * After deploying/debugging this to your RIO, first use the left Y-stick 
- * to throttle the Talon manually.  This will confirm your hardware setup/sensors
+ * to throttle the Talon manually.	This will confirm your hardware setup/sensors
  * and will allow you to take initial measurements.
  * 
  * Be sure to confirm that when the Talon is driving forward (green) the 

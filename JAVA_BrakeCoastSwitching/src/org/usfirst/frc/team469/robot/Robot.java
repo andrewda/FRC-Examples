@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class Robot extends IterativeRobot {
-  	/** our test talon */
+	/** our test talon */
 	CANTalon _tal = new CANTalon(0);
 	/* our test gamepad */
 	Joystick _joy = new Joystick(0);	
@@ -14,10 +14,10 @@ public class Robot extends IterativeRobot {
 	boolean _brake = true;
 	/** c'tor Select the brake mode to start with. */
 	public Robot() {
-		_tal.enableBrakeMode(_brake); 			/* override brake setting programmatically */
+		_tal.enableBrakeMode(_brake);			/* override brake setting programmatically */
 		System.out.println("brake:" + _brake);	/* instrument to console */
 	}
-    /** Every loop, flip brake mode if button1 when is pressed. */
+	/** Every loop, flip brake mode if button1 when is pressed. */
 	public void commonloop() {
 		/* get buttons */
 		boolean [] btns= new boolean [_btnsLast.length];
@@ -27,14 +27,14 @@ public class Robot extends IterativeRobot {
 		/* flip brake when btn1 is pressed */
 		if(btns[1] && !_btnsLast[1]) {
 			_brake = !_brake;
-			_tal.enableBrakeMode(_brake); 			/* override brake setting programmatically */
-			System.out.println("brake:" + _brake); 	/* instrument to console */
+			_tal.enableBrakeMode(_brake);			/* override brake setting programmatically */
+			System.out.println("brake:" + _brake);	/* instrument to console */
 		}		
 	
 		/* save buttons states for on-press detection */
 		for(int i=1;i<10;++i)
 			_btnsLast[i] = btns[i];
-    }
+	}
 	public void disabledPeriodic() {
 		commonloop(); /* just call a "common" loop */
 	}

@@ -5,7 +5,7 @@
  * Be sure to select the correct feedback sensor using SetFeedbackDevice() below.
  *
  * After deploying/debugging this to your RIO, first use the left Y-stick
- * to throttle the Talon manually.  This will confirm your hardware setup.
+ * to throttle the Talon manually.	This will confirm your hardware setup.
  * Be sure to confirm that when the Talon is driving forward (green) the
  * position sensor is moving in a positive direction.  If this is not the cause
  * flip the boolean input to the SetSensorDirection() call below.
@@ -26,7 +26,7 @@ private:
 	int _loops = 0;
 
 	void RobotInit() {
-        /* first choose the sensor */
+		/* first choose the sensor */
 		_talon->SetFeedbackDevice(CANTalon::CtreMagEncoder_Relative);
 		_talon->SetSensorDirection(false);
 		//_talon->ConfigEncoderCodesPerRev(XXX), // if using FeedbackDevice.QuadEncoder
@@ -56,17 +56,17 @@ private:
 		_sb.append(std::to_string(_talon->GetSpeed()));
 		/* while button1 is held down, closed-loop on target velocity */
 		if (_joy->GetRawButton(1)) {
-        	/* Speed mode */
+			/* Speed mode */
 			double targetSpeed = leftYstick * 1500.0; /* 1500 RPM in either direction */
 			_talon->SetControlMode(CANSpeedController::kSpeed);
-        	_talon->Set(targetSpeed); /* 1500 RPM in either direction */
+			_talon->Set(targetSpeed); /* 1500 RPM in either direction */
 
 			/* append more signals to print when in speed mode. */
 			_sb.append("\terrNative:");
 			_sb.append(std::to_string(_talon->GetClosedLoopError()));
 			_sb.append("\ttrg:");
 			_sb.append(std::to_string(targetSpeed));
-        } else {
+		} else {
 			/* Percent voltage mode */
 			_talon->SetControlMode(CANSpeedController::kPercentVbus);
 			_talon->Set(leftYstick);

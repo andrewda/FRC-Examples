@@ -11,7 +11,7 @@ public:
 	std::stringstream _work;
 	bool _btn1, _btn2, _btn3, _btn4;
 	/** simple constructor */
-	Robot() : _srx(9), _joy(0), _work(), _btn1(false), _btn2(false), _btn3(false), _btn4(false) 	{	}
+	Robot() : _srx(9), _joy(0), _work(), _btn1(false), _btn2(false), _btn3(false), _btn4(false)		{	}
 	/* everytime we enter disable, reinit*/
 	void DisabledInit() {
 		_srx.SetFeedbackDevice(CANTalon::CtreMagEncoder_Relative); /* MagEncoder meets the requirements for Unit-Scaling */

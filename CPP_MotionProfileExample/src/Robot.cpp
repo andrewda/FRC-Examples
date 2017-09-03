@@ -4,7 +4,7 @@
  * as the roboRIO streams them into the Talon SRX.
  * 
  * There are many valid ways to use this feature and this example does not sufficiently demonstrate every possible
- * method.  Motion Profile streaming can be as complex as the developer needs it to be for advanced applications,
+ * method.	Motion Profile streaming can be as complex as the developer needs it to be for advanced applications,
  * or it can be used in a simple fashion for fire-and-forget actions that require precise timing.
  * 
  * This application is an IterativeRobot project to demonstrate a minimal implementation not requiring the command 
@@ -47,7 +47,7 @@ public:
 		_talon.SetFeedbackDevice(CANTalon::CtreMagEncoder_Relative);
 		_talon.SetSensorDirection(true); /* keep sensor and motor in phase */
 	}
-	/**  function is called periodically during operator control */
+	/**	 function is called periodically during operator control */
 	void TeleopPeriodic()
 	{
 		/* get buttons */

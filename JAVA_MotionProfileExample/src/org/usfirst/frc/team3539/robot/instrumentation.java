@@ -1,21 +1,21 @@
 /**
  * Since this example focuses on Motion Control, lets print everything related to MP in a clean 
- * format.  Expect to see something like......
+ * format.	Expect to see something like......
  * 
- * Hold            2048            0               0               1                                                                               5.0             0.0
- * Hold            2048            0               0               1                                                                               5.0             0.0
- * outputEnable    topBufferRem    topBufferCnt    btmBufferCnt    IsValid     HasUnderrun      IsUnderrun          IsLast         VelOnly         targPos         targVel
- * Hold            2048            0               0               1                                                                               5.0             0.0
- * Hold            2048            0               0               1                                                                               5.0             0.0
- * Hold            2048            0               0               1                                                                               5.0             0.0
- * Hold            2048            0               0               1                                                                               5.0             0.0
- * Hold            2048            0               0               1                                                                               5.0             0.0
- * Hold            2048            0               0               1                                                                               5.0             0.0
- * Hold            2048            0               0               1                                                                               5.0             0.0
- * outputEnable    topBufferRem    topBufferCnt    btmBufferCnt    IsValid     HasUnderrun      IsUnderrun          IsLast         VelOnly         targPos         targVel
- * Hold            2048            0               0               1                                                                               5.0             0.0
- * Hold            2048            0               0               1                                                                               5.0             0.0
- * Hold            2048            0               0               1                                                                               5.0             0.0
+ * Hold			   2048			   0			   0			   1																			   5.0			   0.0
+ * Hold			   2048			   0			   0			   1																			   5.0			   0.0
+ * outputEnable	   topBufferRem	   topBufferCnt	   btmBufferCnt	   IsValid	   HasUnderrun		IsUnderrun			IsLast		   VelOnly		   targPos		   targVel
+ * Hold			   2048			   0			   0			   1																			   5.0			   0.0
+ * Hold			   2048			   0			   0			   1																			   5.0			   0.0
+ * Hold			   2048			   0			   0			   1																			   5.0			   0.0
+ * Hold			   2048			   0			   0			   1																			   5.0			   0.0
+ * Hold			   2048			   0			   0			   1																			   5.0			   0.0
+ * Hold			   2048			   0			   0			   1																			   5.0			   0.0
+ * Hold			   2048			   0			   0			   1																			   5.0			   0.0
+ * outputEnable	   topBufferRem	   topBufferCnt	   btmBufferCnt	   IsValid	   HasUnderrun		IsUnderrun			IsLast		   VelOnly		   targPos		   targVel
+ * Hold			   2048			   0			   0			   1																			   5.0			   0.0
+ * Hold			   2048			   0			   0			   1																			   5.0			   0.0
+ * Hold			   2048			   0			   0			   1																			   5.0			   0.0
  * 
  * ...where the columns are reprinted occasionally so you know whats up.
  * 
